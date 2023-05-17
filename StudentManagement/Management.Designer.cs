@@ -46,6 +46,7 @@
             btnDelete = new Button();
             btnRules = new Button();
             lableMes = new Label();
+            labelMes = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvStudent).BeginInit();
             SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             dgvStudent.Size = new Size(740, 198);
             dgvStudent.TabIndex = 0;
             dgvStudent.CellDoubleClick += dgvStudent_CellDoubleClick;
+            dgvStudent.EditingControlShowing += dgvStudent_EditingControlShowing;
             // 
             // label1
             // 
@@ -203,11 +205,20 @@
             lableMes.Size = new Size(0, 15);
             lableMes.TabIndex = 17;
             // 
+            // labelMes
+            // 
+            labelMes.AutoSize = true;
+            labelMes.Location = new Point(303, 420);
+            labelMes.Name = "labelMes";
+            labelMes.Size = new Size(0, 15);
+            labelMes.TabIndex = 18;
+            // 
             // Management
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(792, 451);
+            Controls.Add(labelMes);
             Controls.Add(lableMes);
             Controls.Add(btnRules);
             Controls.Add(btnDelete);
@@ -254,5 +265,6 @@
         private Button btnDelete;
         private Button btnRules;
         private Label lableMes;
+        private Label labelMes;
     }
 }

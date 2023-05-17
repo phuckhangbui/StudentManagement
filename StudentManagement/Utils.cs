@@ -27,11 +27,9 @@ namespace StudentManagement
 
         public static string ProcessName(String txtName)
         {
-
             TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
             String name = textInfo.ToTitleCase(ProcessDes(txtName));
             return name;
-
         }
 
         public static int ProcessAge(String txtAge)
@@ -101,13 +99,11 @@ namespace StudentManagement
             if (!isEmpty(txtAge))
             {
                 age = ProcessAge(txtAge);
-
             }
 
             if (!isEmpty(txtDes))
             {
                 des = ProcessDes(txtDes);
-
             }
 
             if (!isEmpty(txtPhone) && ProcessPhone(txtPhone))

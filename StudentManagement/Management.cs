@@ -19,7 +19,7 @@
             }
 
             dgvStudent.DataSource = new BindingSource() { DataSource = students };
-            lableMes.Text = "";
+            labelMes.Text = "";
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
         }
@@ -28,20 +28,23 @@
         {
             DateTime now = DateTime.Now;
             Student student = Utils.ProcessInput(txtId.Text, txtName.Text, txtAge.Text, txtDes.Text, txtPhone.Text, txtEmail.Text, now);
-            lableMes.Text = "";
+            labelMes.Text = "";
             if (student != null)
             {
                 if (students.Any(student => student.Id == int.Parse(txtId.Text)))
                 {
-                    lableMes.Text = "This id already exist in the database!";
+                    labelMes.Text = "This id already exist in the database!";
                 }
                 else
+                {
                     students.Add(student);
-
+                    labelMes.Text = "Create student successfully!";
+                    resetState();
+                }
             }
             else
             {
-                lableMes.Text = "Invalid input, please refer to the rules book";
+                labelMes.Text = "Invalid input, please refer to the rules book";
             }
             dgvStudent.DataSource = new BindingSource() { DataSource = students };
         }
@@ -64,7 +67,7 @@
         private void dgvStudent_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
-            if (e.RowIndex == dgv.Rows.Count - 1)
+            if (e.RowIndex == dgv.Rows.Count - 1 || e.RowIndex == -1)
             {
                 resetState();
             }
@@ -91,16 +94,17 @@
         {
             DateTime now = DateTime.Now;
             Student student = Utils.ProcessInput(txtId.Text, txtName.Text, txtAge.Text, txtDes.Text, txtPhone.Text, txtEmail.Text, now);
-            lableMes.Text = "";
+            labelMes.Text = "";
             if (student != null)
             {
                 int index = students.FindIndex(student => student.Id == int.Parse(txtId.Text));
                 students[index] = student;
+                labelMes.Text = "Update student successfully!";
                 resetState();
             }
             else
             {
-                lableMes.Text = "Invalid input, please refer to the rules book";
+                labelMes.Text = "Invalid input, please refer to the rules book";
             }
             dgvStudent.DataSource = new BindingSource() { DataSource = students };
         }
@@ -109,6 +113,8 @@
         {
             int index = students.FindIndex(student => student.Id == int.Parse(txtId.Text));
             students.RemoveAt(index);
+            labelMes.Text = "";
+            labelMes.Text = "Delete student successfully!";
             resetState();
             dgvStudent.DataSource = new BindingSource() { DataSource = students };
         }
@@ -121,5 +127,13 @@
                 "Phone Number lenght is between 9 and 11\n" +
                 "Email must follow this format 'email@email.com'", "Rules", MessageBoxButtons.OK);
         }
+
+        private void dgvStudent_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+            //Disable editting in all cell
+            e.Control.Enabled = false;
+        }
+
     }
 }
