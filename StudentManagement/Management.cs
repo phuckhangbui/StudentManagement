@@ -131,6 +131,7 @@
         {
             MessageBox.Show("No empty input field\n" +
                 "ID must be a natural number \n" +
+                "No number at the first character and no special characters are allowed in name\n" +
                 "Age must be a natural number and not greater than 120\n" +
                 "Phone Number lenght is between 9 and 11\n" +
                 "Email must follow this format 'email@email.com'", "Rules", MessageBoxButtons.OK);

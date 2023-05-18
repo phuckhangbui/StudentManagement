@@ -17,7 +17,9 @@ namespace StudentManagement
         {
             try
             {
-                if (!errorMes.Contains("All field must not be empty") && string.IsNullOrWhiteSpace(str))
+                if (!errorMes.Contains("All field must not be empty") && string.IsNullOrWhiteSpace(str) &&
+                    !errorMes.Contains("No special characters allowed in name") &&
+                    !errorMes.Contains("No number at the first character in name"))
                     errorMes.Add("All field must not be empty");
                 return string.IsNullOrWhiteSpace(str);
             }
@@ -56,6 +58,17 @@ namespace StudentManagement
         public static string ProcessName(String txtName)
         {
             TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+            if (Regex.IsMatch(txtName, @"[^a-zA-Z\s\d]"))
+            {
+                errorMes.Add("No special characters allowed in name");
+                return "";
+            }
+
+            if (char.IsDigit(txtName, 0))
+            {
+                errorMes.Add("No number at the first character in name");
+                return "";
+            }
             String name = textInfo.ToTitleCase(ProcessDes(txtName));
             return name;
         }
