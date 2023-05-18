@@ -120,6 +120,7 @@
             // 
             txtId.Location = new Point(101, 325);
             txtId.Margin = new Padding(3, 4, 3, 4);
+            txtId.MaxLength = 50;
             txtId.Name = "txtId";
             txtId.Size = new Size(195, 27);
             txtId.TabIndex = 7;
@@ -128,6 +129,7 @@
             // 
             txtName.Location = new Point(101, 363);
             txtName.Margin = new Padding(3, 4, 3, 4);
+            txtName.MaxLength = 100;
             txtName.Name = "txtName";
             txtName.Size = new Size(195, 27);
             txtName.TabIndex = 8;
@@ -136,6 +138,7 @@
             // 
             txtAge.Location = new Point(101, 397);
             txtAge.Margin = new Padding(3, 4, 3, 4);
+            txtAge.MaxLength = 10;
             txtAge.Name = "txtAge";
             txtAge.Size = new Size(195, 27);
             txtAge.TabIndex = 9;
@@ -144,6 +147,7 @@
             // 
             txtEmail.Location = new Point(101, 507);
             txtEmail.Margin = new Padding(3, 4, 3, 4);
+            txtEmail.MaxLength = 100;
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(195, 27);
             txtEmail.TabIndex = 12;
@@ -152,6 +156,7 @@
             // 
             txtPhone.Location = new Point(101, 472);
             txtPhone.Margin = new Padding(3, 4, 3, 4);
+            txtPhone.MaxLength = 50;
             txtPhone.Name = "txtPhone";
             txtPhone.Size = new Size(195, 27);
             txtPhone.TabIndex = 11;
@@ -160,6 +165,7 @@
             // 
             txtDes.Location = new Point(101, 435);
             txtDes.Margin = new Padding(3, 4, 3, 4);
+            txtDes.MaxLength = 500;
             txtDes.Name = "txtDes";
             txtDes.Size = new Size(195, 27);
             txtDes.TabIndex = 10;
