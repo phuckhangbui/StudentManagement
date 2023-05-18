@@ -3,23 +3,51 @@ using System.Text.RegularExpressions;
 
 namespace StudentManagement
 {
+
     public class Utils
     {
 
+        public static List<string> errorMes;
+
+        public static void resetErrorMes()
+        {
+            errorMes = new List<string>();
+        }
         public static bool isEmpty(String str)
         {
-            return string.IsNullOrWhiteSpace(str);
+            try
+            {
+                if (!errorMes.Contains("All field must not be empty") && string.IsNullOrWhiteSpace(str))
+                    errorMes.Add("All field must not be empty");
+                return string.IsNullOrWhiteSpace(str);
+            }
+            catch (Exception e)
+            {
+                errorMes = new List<string>();
+                errorMes.Add("All field must not be empty");
+                return false;
+            }
         }
         public static int ProcessID(String txtId)
         {
             try
             {
-                int id = int.Parse(txtId);
-                return id;
+                if (!isEmpty(txtId))
+                {
+                    int id = int.Parse(txtId);
+
+                    if (id < 0)
+                    {
+                        errorMes.Add("ID must be a natural number");
+                        return -1;
+                    }
+                    return id;
+                }
+                return -1;
             }
             catch
             {
-
+                errorMes.Add("ID must be a natural number");
                 return -1;
             }
         }
@@ -39,11 +67,16 @@ namespace StudentManagement
                 int age = int.Parse(txtAge);
                 if (age > 0 && age <= 120)
                     return age;
-                else return -1;
+
+                else
+                {
+                    errorMes.Add("Age must be between 1 and 120");
+                    return -1;
+                }
             }
             catch
             {
-
+                errorMes.Add("Age must be a natural number");
                 return -1;
             }
         }
@@ -57,7 +90,7 @@ namespace StudentManagement
 
             // Match the email against the regular expression
             Match match = regex.Match(txtEmail);
-
+            if (!match.Success) errorMes.Add("Email must follow this format 'email@email.com'");
             // Check if the email matches the pattern
             return match.Success;
         }
@@ -68,6 +101,7 @@ namespace StudentManagement
             String pattern = @"^[0-9]{9,11}$";
             Regex regex = new Regex(pattern);
             Match match = regex.Match(numWithoutSpace);
+            if (!match.Success) errorMes.Add("Phone Number lenght is between 9 and 11");
             return match.Success;
         }
 

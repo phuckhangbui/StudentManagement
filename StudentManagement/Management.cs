@@ -26,6 +26,7 @@
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            Utils.resetErrorMes();
             DateTime now = DateTime.Now;
             Student student = Utils.ProcessInput(txtId.Text, txtName.Text, txtAge.Text, txtDes.Text, txtPhone.Text, txtEmail.Text, now);
             labelMes.Text = "";
@@ -44,7 +45,9 @@
             }
             else
             {
-                labelMes.Text = "Invalid input, please refer to the rules book";
+                string message = string.Join('\n', Utils.errorMes);
+                labelMes.Text = message;
+                //labelMes.Text = "Invalid input, please refer to the rules book";
             }
             dgvStudent.DataSource = new BindingSource() { DataSource = students };
         }
@@ -58,6 +61,7 @@
             txtEmail.Text = "";
             txtPhone.Text = "";
 
+            Utils.resetErrorMes();
             txtId.ReadOnly = false;
             btnCreate.Enabled = true;
             btnDelete.Enabled = false;
@@ -67,6 +71,7 @@
         private void dgvStudent_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
+            labelMes.Text = "";
             if (e.RowIndex == dgv.Rows.Count - 1 || e.RowIndex == -1)
             {
                 resetState();
@@ -92,6 +97,7 @@
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            Utils.resetErrorMes();
             DateTime now = DateTime.Now;
             Student student = Utils.ProcessInput(txtId.Text, txtName.Text, txtAge.Text, txtDes.Text, txtPhone.Text, txtEmail.Text, now);
             labelMes.Text = "";
@@ -104,13 +110,15 @@
             }
             else
             {
-                labelMes.Text = "Invalid input, please refer to the rules book";
+                string message = string.Join('\n', Utils.errorMes);
+                labelMes.Text = message;
             }
             dgvStudent.DataSource = new BindingSource() { DataSource = students };
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            Utils.resetErrorMes();
             int index = students.FindIndex(student => student.Id == int.Parse(txtId.Text));
             students.RemoveAt(index);
             labelMes.Text = "";
